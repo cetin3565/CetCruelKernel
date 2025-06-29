@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        model: [ "G970F,G973F,G975F", "N975F" ]
+        model: [ "G973F" ]
 
     steps:
       - uses: actions/checkout@v3
@@ -54,19 +54,26 @@ jobs:
         run: |
           set -e -o pipefail
           ./cruelbuild config                    \
-                       model=${{ matrix.model }} \
-                       name="Cruel-devel"        \
-                       toolchain=$TOOLCHAIN      \
-                       +magisk                   \
-                       +nohardening              \
-                       +ttl                      \
-                       +wireguard                \
-                       +cifs                     \
-                       +sdfat                    \
-                       +ntfs                     \
-                       +force_dex_wqhd           \
-                       +morosound                \
-                       +boeffla_wl_blocker       \
+              os_patch_level=2025-05 \
+              model=${{ matrix.model }} \
+              name="CETOKernel" \
+              toolchain=$TOOLCHAIN  \
+              +magisk=v27.0 \
+              -wireguard \
+              +force_dex_wqhd \
+              -ttl \
+              +fp_boost \
+              -mass_storage \
+              -ntfs \
+              -cifs \
+              -sdfat \
+              +nohardening \
+              +tcp_bbr \
+              +noatime \
+              -usb_serial \
+              +boeffla_wl_blocker \
+              +always_permit \
+              +performance
           2>&1 | tee config.info
 
       - name: Install gcc-aarch64-linux-gnu
@@ -84,7 +91,14 @@ jobs:
         run: git clone --depth 1 -j $(nproc) --branch $TOOLCHAIN --single-branch https://github.com/CruelKernel/samsung-exynos9820-toolchain toolchain
 
       - name: Kernel Build
-        run: ./cruelbuild :build
+        run: ./cruelbuild :build 2>&1 | tee build.log
+
+      - name: Upload Build Log
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build-Log-${{ matrix.model }}
+          path: build.log
+          if-no-files-found: error
 
       - name: Install mkbootimg
         run: |
@@ -116,21 +130,21 @@ jobs:
           unzip ../CruelKernel.zip
       - name: Upload Kernel Zip
         if: env.INSTALLER == 'yes'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: CruelKernel-${{ matrix.model }}
           path: installer/*
           if-no-files-found: error
       - name: Upload Kernel Images
         if: env.INSTALLER != 'yes'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: CruelKernel-${{ matrix.model }}
           path: '*.img'
           if-no-files-found: error
 
       - name: Upload Kernel Info
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: ConfigurationInfo-${{ matrix.model }}
           path: config.*
