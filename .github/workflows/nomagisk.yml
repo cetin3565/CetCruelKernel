@@ -101,6 +101,12 @@ jobs:
           path: build.log
           if-no-files-found: error
 
+      - name: Upload Image.gz-dtb
+        uses: actions/upload-artifact@v4
+        with:
+          name: Image.gz-dtb
+          path: arch/arm64/boot/Image.gz-dtb
+
       - name: Install mkbootimg
         run: |
           wget -q https://android.googlesource.com/platform/system/tools/mkbootimg/+archive/refs/heads/master.tar.gz -O - | tar xzf - mkbootimg.py gki
