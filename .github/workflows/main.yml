@@ -1,8 +1,8 @@
 name: Build
 
-#on: [push]
-on:
-  workflow_dispatch:
+on: [push]
+# on:
+ # workflow_dispatch:
 env:
   TOOLCHAIN: cruel
   INSTALLER: yes
@@ -69,7 +69,7 @@ jobs:
               -cifs \
               -sdfat \
               +nohardening \
-              +tcp_bbr \
+              -tcp_bbr \
               +noatime \
               -usb_serial \
               +boeffla_wl_blocker \
