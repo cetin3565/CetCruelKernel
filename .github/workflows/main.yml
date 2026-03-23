@@ -1,6 +1,6 @@
 name: Build
 
-# on: [push]
+ on: [push]
 on:
    workflow_dispatch:
 env:
@@ -57,7 +57,7 @@ jobs:
           ./cruelbuild config                    \
               os_patch_level=2025-05 \
               model=${{ matrix.model }} \
-              name="CETOKernel" \
+              name="CETOKernel-2026" \
               toolchain=$TOOLCHAIN  \
               +magisk=v27.0 \
               -wireguard \
