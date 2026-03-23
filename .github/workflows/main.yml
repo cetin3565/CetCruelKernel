@@ -57,7 +57,7 @@ jobs:
           ./cruelbuild config                    \
               os_patch_level=2025-05 \
               model=${{ matrix.model }} \
-              name="CETOKernel-2026" \
+              name="CETOKernel-2026-2" \
               toolchain=$TOOLCHAIN  \
               +magisk=v27.0 \
               -wireguard \
