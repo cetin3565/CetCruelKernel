@@ -68,7 +68,6 @@ jobs:
               +performance \
               +nodebug \
               +io_maple \
-              100hz \
               -fp_boost \
               -wireguard \
               -force_dex_wqhd \
