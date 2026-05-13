@@ -60,7 +60,6 @@ jobs:
               name="CETO-Kernel-2026-3" \
               toolchain=$TOOLCHAIN  \
               +magisk=v27.0 \
-              +uclamp \
               +nohardening \
               +tcp_bbr \
               +noatime \
