@@ -55,7 +55,7 @@ jobs:
         run: |
           set -e -o pipefail
           ./cruelbuild config                    \
-              os_patch_level=2026-05-13 \
+              os_patch_level=2026-05 \
               model=${{ matrix.model }} \
               name="CETO-Kernel-2026-3" \
               toolchain=$TOOLCHAIN  \
