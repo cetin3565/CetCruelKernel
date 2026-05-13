@@ -60,21 +60,25 @@ jobs:
               name="CETOKernel-2026-2" \
               toolchain=$TOOLCHAIN  \
               +magisk=v27.0 \
+              +uclamp \
+              +nohardening \
+              +tcp_bbr \
+              +noatime \
+              +boeffla_wl_blocker \
+              +always_permit \
+              +performance \
+              +nodebug \
+              +io_maple \
+              100hz \
+              -fp_boost \
               -wireguard \
-              +force_dex_wqhd \
+              -force_dex_wqhd \
               -ttl \
-              +fp_boost \
               -mass_storage \
               -ntfs \
               -cifs \
               -sdfat \
-              +nohardening \
-              -tcp_bbr \
-              +noatime \
               -usb_serial \
-              +boeffla_wl_blocker \
-              +always_permit \
-              +performance
           2>&1 | tee config.info
 
       - name: Install gcc-aarch64-linux-gnu
