@@ -59,7 +59,7 @@ jobs:
               model=${{ matrix.model }} \
               name="CETO-Kernel-2026-3" \
               toolchain=$TOOLCHAIN  \
-              +magisk=v30.7 \
+              +magisk \
               +nohardening \
               +tcp_bbr \
               +noatime \
