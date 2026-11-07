@@ -57,9 +57,10 @@ jobs:
           ./cruelbuild config                    \
               os_patch_level=2026-05 \
               model=${{ matrix.model }} \
-              name="CETO-Kernel-2026-3" \
+              name="CETO-Kernel-2026-kasim" \
               toolchain=$TOOLCHAIN  \
               +magisk=v27.0 \
+              +performance \
               +nohardening \
               +tcp_bbr \
               +noatime \
