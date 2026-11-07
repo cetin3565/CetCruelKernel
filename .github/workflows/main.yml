@@ -1,8 +1,8 @@
 name: Build
 
-on: [push]
-#on:
-  #workflow_dispatch:
+#on: [push]
+on:
+  workflow_dispatch:
 env:
   TOOLCHAIN: cruel
   INSTALLER: yes
@@ -64,8 +64,6 @@ jobs:
               +tcp_bbr \
               +noatime \
               +boeffla_wl_blocker \
-              +always_permit \
-              +performance \
               +nodebug \
               +io_maple \
               -fp_boost \
@@ -73,10 +71,10 @@ jobs:
               -force_dex_wqhd \
               -ttl \
               -mass_storage \
-              -ntfs \
-              -cifs \
-              -sdfat \
-              -usb_serial \
+              +ntfs \
+              +cifs \
+              +sdfat \
+              +usb_serial \
           2>&1 | tee config.info
 
       - name: Install gcc-aarch64-linux-gnu
